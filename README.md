@@ -8,3 +8,4 @@ Still under development!
 #### TODO
 - Learn how to push it to a App Store of China
 - Start modernizing klotski 
+- I think this is really not easy to handle
