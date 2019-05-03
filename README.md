@@ -3,10 +3,5 @@ Klotski is a tradition game in China, and this repository is a Klotski game base
 Hope you enjoy it!
 
 #### Current Status
-Still under development!
+Still under development! Will be put on Android Store like Google Play
 
-#### TODO
-- Learn how to push it to a App Store of China
-- Start modernizing klotski 
-- I think this is really not easy to handle
-===
