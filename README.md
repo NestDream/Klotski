@@ -5,3 +5,5 @@ Hope you enjoy it!
 #### Current Status
 Still under development! Will be put on Android Store like Google Play
 
+#### 文档
+积分 提示 排名 悔棋制度
