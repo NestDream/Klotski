@@ -13,4 +13,7 @@ Still under development! Will be put on Android Store like Google Play
 UI改好看点，可以使用某个主题
 可以加入数字版或者图像版华容道（一个意思）
 最重要的是被应用市场收录
+
+缺陷：关羽向左走的时候会崩溃，应该写成不能左走
+
 DDL：6月15日之前
