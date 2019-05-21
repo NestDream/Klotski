@@ -10,5 +10,5 @@ Still under development! Will be put on Android Store like Google Play
 后端服务器  
 手机 微信自动登录  
 要写清楚各方面的情况  
-
+update all of them
 DDL：6月15日之前
