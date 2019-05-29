@@ -1,3 +1,6 @@
+### Google Play
+本游戏已经发行在Google Play上：https://play.google.com/store/apps/details?id=com.guoli.klotski
+
 ### Klotski
 Klotski is a tradition game in China, and this repository is a Klotski game based on Android platform.  
 Hope you enjoy it!
