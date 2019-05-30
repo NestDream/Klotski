@@ -1,14 +1,16 @@
+## 剪纸华容道
+开发者：郭立  
+组织：南开大学软件学院  
+学号：1613545
+
 ### Google Play
 本游戏已经发行在Google Play上：https://play.google.com/store/apps/details?id=com.guoli.klotski
 
-### Klotski
-Klotski is a tradition game in China, and this repository is a Klotski game based on Android platform.  
-Hope you enjoy it!
+### 剪纸华容道
+- 剪纸是中华民族的一项传统艺术，华容道是中华民族的一项传统益智类游戏。本游戏结合二者，制作了一个以剪纸为游戏美术风格的安卓端华容道小游戏。
+- 本游戏为免费游戏，不以盈利为目的。剪纸图片来自开源社区。
 
-#### Current Status
-Still under development! Will be put on Android Store like Google Play
-
-#### 文档
+#### 开发者文档记录
 积分 提示 排名 悔棋制度  
 要写清楚各方面的情况  
 要做的事情：积分制度 排名制度 悔棋制度 准备做成一个单机游戏
@@ -37,4 +39,5 @@ TODO:
 - [ ] 本地排行榜（步数榜和时间榜）
 - [ ]  图像素材设计
 - [x] 发布到Google Play上（沒有想到那麽容易）
+- []給華容道起一個炫酷的名字吧
 DDL：6月15日之前

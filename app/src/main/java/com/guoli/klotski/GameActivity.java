@@ -59,6 +59,25 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public void reset(View view) {
+        //背景数组对应填充
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 4; j++)
+                BG[i][j] = 1;
+        BG[4][1] = 0;
+        BG[4][2] = 0;
+        //输出屏幕宽度和
+        Step = 0;
+        txt1.post(new Runnable() {
+            @Override
+            public void run() {
+                txt1.setText("Screen Width:" + txt1.getWidth() + "; Qz Width" + Qz[1].getWidth());
+                SW = txt1.getWidth();
+                init();
+            }
+        });
+    }
+
     //监听实现
     public class mTouch implements View.OnTouchListener {
 
@@ -176,6 +195,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (r + 1 == 3 && c == 1) {
                                     Log.d("onWinning", "From up to down");
                                     txt1.setText("你赢了！共用" + Step + "步！");
+                                    //todo:此处弹出一个dialog
                                     //此处应该转到另一个activity，胜利用新的activity或者一个toast体现
                                     //记录用户时间和步数，如果top5，加入排行榜
                                     //注意析构
@@ -226,6 +246,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (r == 3 && c == 2) {
                                     Log.d("onWinning", "From right to left");
                                     txt1.setText("你赢了，共用" + Step + "步！");
+                                    //todo:胜利的时候专门写一个函数啊
                                 }
                             }
                             break;
@@ -273,6 +294,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (r == 3 && c == 0) {
                                     Log.d("onWinning", "From left to right");
                                     txt1.setText("你赢了！共用" + Step + "步！");
+                                    //todo：胜利的时候专门写一个函数，一个dialog
                                 }
                             }
                             break;
