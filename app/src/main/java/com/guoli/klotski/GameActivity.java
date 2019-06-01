@@ -3,21 +3,23 @@ package com.guoli.klotski;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
+//最后工作：添加玩法，多个地图选择；记录最高成绩；胜利后弹出提示框
+//美化游戏主界面
+//写好报告，开源github（6月5日）
+//解决在不同的型号手机上会出现的bug
 public class GameActivity extends AppCompatActivity {
-    Button Qz[] = new Button[10];
-    int BG[][] = new int[5][4];
-    TextView txt1;
+    Button Qz[] = new Button[10];//总共10个棋子
+    int BG[][] = new int[5][4];//总共五行四列
+    TextView txt1;//用于显示文字的TextView，目前用于显示步数
     float SW;
     float x1, x2, y1, y2;
     int Step = 0;
@@ -26,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming);
+
         Qz[0] = (Button) findViewById(R.id.Qz1);
         Qz[1] = (Button) findViewById(R.id.Qz2);
         Qz[2] = (Button) findViewById(R.id.Qz3);
@@ -41,7 +44,8 @@ public class GameActivity extends AppCompatActivity {
         //注册监听器
         for (int i = 0; i < 10; i++)
             Qz[i].setOnTouchListener(new mTouch());
-        //背景数组对应填充
+        //背景数组对应填充 1-possessed 0-available
+        //在这里可以修改游戏地图
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++)
                 BG[i][j] = 1;
@@ -67,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
         BG[4][1] = 0;
         BG[4][2] = 0;
         //输出屏幕宽度和
-        Step = 0;
+        Step = 0;//步数归零
         txt1.post(new Runnable() {
             @Override
             public void run() {
@@ -98,7 +102,7 @@ public class GameActivity extends AppCompatActivity {
                     type = 3;//宽大于高是横的
             }
 
-            r = (int) (v.getY() / 270f);
+            r = (int) (v.getY() / 270f);//这里可能出问题
             c = (int) (v.getX() / 270f);
             Log.d("mTouch", "User is touching at(" + r + "," + c + ")");//touch的时候的行列，row column
 
@@ -118,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
                     switch (type) {
                         case 1:
                             if (r > 0 && BG[r - 1][c] == 0) {
-                                SetPois(v, r - 1, c);
+                                SetPos(v, r - 1, c);
                                 BG[r - 1][c] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -127,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 2:
                             if (r > 0 && BG[r - 1][c] == 0) {
-                                SetPois(v, r - 1, c);
+                                SetPos(v, r - 1, c);
                                 BG[r - 1][c] = 1;
                                 BG[r + 1][c] = 0;
                                 Step++;
@@ -136,7 +140,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 3:
                             if (r > 0 && BG[r - 1][c] == 0 && BG[r - 1][c + 1] == 0) {
-                                SetPois(v, r - 1, c);
+                                SetPos(v, r - 1, c);
                                 BG[r - 1][c] = BG[r - 1][c + 1] = 1;
                                 BG[r][c] = BG[r][c + 1] = 0;
                                 Step++;
@@ -145,7 +149,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 4:
                             if (r > 0 && BG[r - 1][c] == 0 && BG[r - 1][c + 1] == 0) {
-                                SetPois(v, r - 1, c);
+                                SetPos(v, r - 1, c);
                                 BG[r - 1][c] = BG[r - 1][c + 1] = 1;
                                 BG[r + 1][c] = BG[r + 1][c + 1] = 0;
                                 Step++;
@@ -159,7 +163,7 @@ public class GameActivity extends AppCompatActivity {
                     switch (type) {
                         case 1:
                             if (r < 4 && BG[r + 1][c] == 0) {
-                                SetPois(v, r + 1, c);
+                                SetPos(v, r + 1, c);
                                 BG[r + 1][c] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -168,7 +172,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 2:
                             if (r < 3 && BG[r + 2][c] == 0) {
-                                SetPois(v, r + 1, c);
+                                SetPos(v, r + 1, c);
                                 BG[r + 2][c] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -178,7 +182,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 3:
                             if (r < 4 && BG[r + 1][c] == 0 && BG[r + 1][c + 1] == 0) {
-                                SetPois(v, r + 1, c);
+                                SetPos(v, r + 1, c);
                                 BG[r + 1][c] = BG[r + 1][c + 1] = 1;
                                 BG[r][c] = BG[r][c + 1] = 0;
                                 Step++;
@@ -187,15 +191,15 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 4:
                             if (r < 3 && BG[r + 2][c] == 0 && BG[r + 2][c + 1] == 0) {
-                                SetPois(v, r + 1, c);
+                                SetPos(v, r + 1, c);
                                 BG[r + 2][c] = BG[r + 2][c + 1] = 1;
                                 BG[r][c] = BG[r][c + 1] = 0;
                                 Step++;
                                 txt1.setText("你已经走了：" + Step + "步！");
                                 if (r + 1 == 3 && c == 1) {
                                     Log.d("onWinning", "From up to down");
-                                    txt1.setText("你赢了！共用" + Step + "步！");
-                                    //todo:此处弹出一个dialog
+                                    win();
+//                                    txt1.setText("你赢了！共用" + Step + "步！");
                                     //此处应该转到另一个activity，胜利用新的activity或者一个toast体现
                                     //记录用户时间和步数，如果top5，加入排行榜
                                     //注意析构
@@ -208,7 +212,7 @@ public class GameActivity extends AppCompatActivity {
                     switch (type) {
                         case 1:
                             if (c > 0 && BG[r][c - 1] == 0) {
-                                SetPois(v, r, c - 1);
+                                SetPos(v, r, c - 1);
                                 BG[r][c - 1] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -217,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 2:
                             if (c > 0 && BG[r][c - 1] == 0 && BG[r + 1][c - 1] == 0) {
-                                SetPois(v, r, c - 1);
+                                SetPos(v, r, c - 1);
                                 BG[r][c - 1] = 1;
                                 BG[r + 1][c - 1] = 1;
                                 BG[r][c] = 0;
@@ -228,7 +232,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 3:
                             if (c > 0 && BG[r][c - 1] == 0) {
-                                SetPois(v, r, c - 1);
+                                SetPos(v, r, c - 1);
                                 BG[r][c - 1] = 1;
                                 BG[r][c + 1] = 0;
                                 Step++;
@@ -237,7 +241,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 4:
                             if (c > 0 && BG[r][c - 1] == 0 && BG[r + 1][c - 1] == 0) {
-                                SetPois(v, r, c - 1);
+                                SetPos(v, r, c - 1);
                                 BG[r][c - 1] = BG[r + 1][c - 1] = 1;
                                 BG[r][c + 1] = BG[r + 1][c + 1] = 0;
                                 Step++;
@@ -245,8 +249,8 @@ public class GameActivity extends AppCompatActivity {
 //                                if (r + 1 == 3 && c == 1) {
                                 if (r == 3 && c == 2) {
                                     Log.d("onWinning", "From right to left");
-                                    txt1.setText("你赢了，共用" + Step + "步！");
-                                    //todo:胜利的时候专门写一个函数啊
+                                    win();
+//                                    txt1.setText("你赢了，共用" + Step + "步！");
                                 }
                             }
                             break;
@@ -256,7 +260,7 @@ public class GameActivity extends AppCompatActivity {
                     switch (type) {
                         case 1:
                             if (c < 3 && BG[r][c + 1] == 0) {
-                                SetPois(v, r, c + 1);
+                                SetPos(v, r, c + 1);
                                 BG[r][c + 1] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -265,7 +269,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 2:
                             if (c < 3 & BG[r][c + 1] == 0 && BG[r + 1][c + 1] == 0) {
-                                SetPois(v, r, c + 1);
+                                SetPos(v, r, c + 1);
                                 BG[r][c + 1] = 1;
                                 BG[r + 1][c + 1] = 1;
                                 BG[r][c] = 0;
@@ -276,7 +280,7 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 3:
                             if (c < 2 && BG[r][c + 2] == 0) {
-                                SetPois(v, r, c + 1);
+                                SetPos(v, r, c + 1);
                                 BG[r][c + 2] = 1;
                                 BG[r][c] = 0;
                                 Step++;
@@ -285,16 +289,16 @@ public class GameActivity extends AppCompatActivity {
                             break;
                         case 4:
                             if (c < 2 && BG[r][c + 2] == 0 && BG[r + 1][c + 2] == 0) {
-                                SetPois(v, r, c + 1);
+                                SetPos(v, r, c + 1);
                                 BG[r][c + 2] = BG[r + 1][c + 2] = 1;
                                 BG[r][c] = BG[r + 1][c] = 0;
                                 Step++;
                                 txt1.setText("你已经走了：" + Step + "步！");
 //                                if (r + 1 == 3 && c == 1) {
                                 if (r == 3 && c == 0) {
+//                                    游戏胜利
                                     Log.d("onWinning", "From left to right");
-                                    txt1.setText("你赢了！共用" + Step + "步！");
-                                    //todo：胜利的时候专门写一个函数，一个dialog
+                                    win();
                                 }
                             }
                             break;
@@ -304,6 +308,32 @@ public class GameActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
+    public void win() {
+        //todo:记录最佳成绩
+        txt1.setText("你赢了！共用" + Step + "步！");
+
+        AlertDialog.Builder alertdialogbuilder =
+                new AlertDialog.Builder(GameActivity.this);
+        alertdialogbuilder.setTitle("胜利！");
+        alertdialogbuilder.setMessage("恭喜你获得胜利！总步数为：" + Step);
+        alertdialogbuilder.setPositiveButton("返回主界面", checkout);
+
+        AlertDialog alertdialog = alertdialogbuilder.create();
+        alertdialog.show();
+    }
+
+    private DialogInterface.OnClickListener checkout = new DialogInterface.OnClickListener() {
+        //胜利界面用于退出的Listener
+        @Override
+
+        public void onClick(DialogInterface arg0, int arg1) {
+            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+            startActivity(intent);
+            GameActivity.this.finish();
+        }
+    };
 
     /**
      * 根据手机分辨率从DP转成PX
@@ -318,39 +348,40 @@ public class GameActivity extends AppCompatActivity {
     }
 
     void SetSize(Button v, int w, int h, String txt) {
-        v.setWidth(240);//(w * dip2px(getApplicationContext(),SW/4));
+        v.setWidth(w * dip2px(getApplicationContext(),SW/4));//(240);
         v.setHeight(h * dip2px(getApplicationContext(), SW / 4));
         v.setText(txt);
     }
 
-    void SetPois(View v, int r, int c) {
+    void SetPos(View v, int r, int c) {
         v.setX(c * SW / 4f);
         v.setY(r * SW / 4f);
     }
 
     void init() {
+        //设置每个棋子的大小和位置
         SetSize(Qz[0], 1, 1, "兵");
-        SetPois(Qz[0], 4, 0);
+        SetPos(Qz[0], 4, 0);
         SetSize(Qz[1], 1, 1, "兵");
-        SetPois(Qz[1], 3, 1);
+        SetPos(Qz[1], 3, 1);
         SetSize(Qz[2], 1, 1, "兵");
-        SetPois(Qz[2], 3, 2);
+        SetPos(Qz[2], 3, 2);
         SetSize(Qz[3], 1, 1, "兵");
-        SetPois(Qz[3], 4, 3);
+        SetPos(Qz[3], 4, 3);
 
         SetSize(Qz[4], 1, 2, "张飞");
-        SetPois(Qz[4], 0, 0);
+        SetPos(Qz[4], 0, 0);
         SetSize(Qz[5], 1, 2, "赵云");
-        SetPois(Qz[5], 0, 3);
+        SetPos(Qz[5], 0, 3);
         SetSize(Qz[6], 1, 2, "马超");
-        SetPois(Qz[6], 2, 0);
+        SetPos(Qz[6], 2, 0);
         SetSize(Qz[7], 1, 2, "黄忠");
-        SetPois(Qz[7], 2, 3);
+        SetPos(Qz[7], 2, 3);
 
         SetSize(Qz[8], 2, 1, "关羽");
-        SetPois(Qz[8], 2, 1);
+        SetPos(Qz[8], 2, 1);
         SetSize(Qz[9], 2, 2, "曹操");
-        SetPois(Qz[9], 0, 1);
+        SetPos(Qz[9], 0, 1);
         //txt1.setText("SW：" +dip2px(getApplicationContext(), SW)+","+getApplicationContext().getResources().getDisplayMetrics().density);
     }
 

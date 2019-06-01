@@ -4,7 +4,7 @@
 学号：1613545
 
 ### Google Play
-本游戏已经发行在Google Play上：https://play.google.com/store/apps/details?id=com.guoli.klotski
+本游戏已经发行在Google Play上：[https://play.google.com/store/apps/details?id=com.guoli.klotski](https://play.google.com/store/apps/details?id=com.guoli.klotski)
 
 ### 剪纸华容道
 - 剪纸是中华民族的一项传统艺术，华容道是中华民族的一项传统益智类游戏。本游戏结合二者，制作了一个以剪纸为游戏美术风格的安卓端华容道小游戏。
@@ -15,19 +15,13 @@
 要写清楚各方面的情况  
 要做的事情：积分制度 排名制度 悔棋制度 准备做成一个单机游戏
 页面：主页面，排名界面（步数/时间）
-UI改好看点，可以使用某个主题
-> 目前打算使用bunny run
+游戏主题：中国传统剪纸艺术
 
-可以加入数字版或者图像版华容道（一个意思）
 
-> 即为简单的图片拼接
 
-最重要的是被应用市场收录
-
-> 目前打算使用Google Play
 
 #### 美术素材
-- 本游戏使用的美术素材来自开源游戏素材网站：https://opengameart.org/
+- 本游戏使用的美术素材来自开源游戏素材网站：[https://opengameart.org/](https://opengameart.org/)
 - 所有美术素材均为开源内容，本游戏也不以营利为目的使用这些素材
 
 TODO:

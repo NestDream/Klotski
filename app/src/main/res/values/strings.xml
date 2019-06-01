@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">剪纸华容道</string>
-    <string name="title">华容道</string>
+    <string name="title">剪纸华容道</string>
     <string name="game_start">开始游戏</string>
     <string name="game_exit">退出游戏</string>
     <string name="about">关于</string>
+    <string name="reset_button">重置棋盘</string>
 </resources>
