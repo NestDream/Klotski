@@ -97,6 +97,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_all_shape"
         android:onClick="reset"
         android:text="@string/reset_button"
         app:layout_constraintBottom_toBottomOf="parent"

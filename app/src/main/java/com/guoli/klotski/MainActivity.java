@@ -3,6 +3,7 @@ package com.guoli.klotski;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,9 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SQLiteDatabase DB = SQLiteDatabase.openDatabase(getFilesDir()+"/rank.db", null, SQLiteDatabase.CREATE_IF_NECESSARY);
         setContentView(R.layout.activity_main);
+
     }
 
     public void gaming_dialog(View view) {
@@ -139,4 +142,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    public void rank(View view) {
+        Intent intent = new Intent(MainActivity.this, RankActivity.class);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
 }
