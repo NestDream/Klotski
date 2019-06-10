@@ -8,7 +8,7 @@
 
     <AbsoluteLayout
         android:id="@+id/Qp"
-        android:layout_width="0dp"
+        android:layout_width="480dp"
         android:layout_height="600dp"
         app:layout_constraintBottom_toTopOf="@+id/Text1"
         app:layout_constraintEnd_toEndOf="parent"

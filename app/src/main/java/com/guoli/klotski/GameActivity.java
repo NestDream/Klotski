@@ -31,6 +31,7 @@ public class GameActivity extends AppCompatActivity {
     float SW;
     float x1, x2, y1, y2;
     int Step = 0;
+    float BingSize = 0;//小兵的大小，判断是哪种type的时候会用到
     SQLiteDatabase DB;
     String insertSql = "insert into user_rank(username, steps) values(?,?)";
 
@@ -110,7 +111,8 @@ public class GameActivity extends AppCompatActivity {
             int type; // 1 兵    2  张飞  3 关羽 4 曹操
             int r, c;
             if (v.getWidth() == v.getHeight()) {
-                if (v.getHeight() > 300)
+                Log.d("HeightWidth", v.getHeight() + "," + v.getWidth());
+                if (v.getHeight() > BingSize)
                     type = 4;//大的是曹操
                 else
                     type = 1;//小的是小兵
@@ -298,6 +300,7 @@ public class GameActivity extends AppCompatActivity {
                             }
                             break;
                         case 4:
+                            Log.d("onCase4", "c and r:(" + c + "," + r + "),and size of BG,BG[0]:" + BG.length + "," + BG[0].length);
                             if (c < 2 && BG[r][c + 2] == 0 && BG[r + 1][c + 2] == 0) {
                                 SetPos(v, r, c + 1);
                                 BG[r][c + 2] = BG[r + 1][c + 2] = 1;
@@ -402,11 +405,11 @@ public class GameActivity extends AppCompatActivity {
 
         String temp_w1 = "width" + v.getWidth();
         String temp_h1 = "height" + v.getHeight();
-        Log.d("qz_init_before", v.getText() + temp_w1 + temp_h1+","+temp);
+        Log.d("qz_init_before", v.getText() + temp_w1 + temp_h1 + "," + temp);
 
-        v.getLayoutParams().width=360;
+        v.getLayoutParams().width = 360;
 //        v.setWidth(360);//(240);
-        v.getLayoutParams().height =h * temp;
+        v.getLayoutParams().height = h * temp;
 //                v.setHeight(h * temp);
 //        v.setWidth(w * dip2px(getApplicationContext(), SW / 4));//(240);
 //        v.setHeight(h * dip2px(getApplicationContext(), SW / 4));
@@ -446,6 +449,8 @@ public class GameActivity extends AppCompatActivity {
         SetSize(Qz[9], 2, 2, "曹操");
         SetPos(Qz[9], 0, 1);
         //txt1.setText("SW：" +dip2px(getApplicationContext(), SW)+","+getApplicationContext().getResources().getDisplayMetrics().density);
+        BingSize = Qz[0].getHeight();
+
     }
 
 
