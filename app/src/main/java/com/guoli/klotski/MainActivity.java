@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gaming_dialog(View view) {
-        final String[] items = {"简单 - 横刀立马", "中等 - 兵分三路", "困难", "非常难"};
+        final String[] items = {"横刀立马"};
         AlertDialog.Builder listDialog =
                 new AlertDialog.Builder(MainActivity.this);
-        listDialog.setTitle("选择游戏难度");
+        listDialog.setTitle("选择游戏关卡");
         listDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

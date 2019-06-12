@@ -1,6 +1,5 @@
 package com.guoli.klotski;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,18 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-//最后工作：添加玩法，多个地图选择；记录最高成绩；胜利后弹出提示框
-//美化游戏主界面
-//写好报告，开源github（6月5日）
-//解决在不同的型号手机上会出现的bug
-//完成数据存储，胜利的时候给自己取一个名字，然后插入数据库中，只展示数据库的前5名
 
 public class GameActivity extends AppCompatActivity {
     Button Qz[] = new Button[10];//总共10个棋子
     int BG[][] = new int[5][4];//总共五行四列
-    TextView txt1;//用于显示文字的TextView，目前用于显示步数
+    TextView gaming_text;//用于显示文字的TextView，目前用于显示步数
     float SW;
     float x1, x2, y1, y2;
     int Step = 0;
@@ -54,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
         Qz[8] = (Button) findViewById(R.id.Qz9);
         Qz[9] = (Button) findViewById(R.id.Qz10);
 
-        txt1 = (TextView) findViewById(R.id.Text1);
+        gaming_text = (TextView) findViewById(R.id.GamingText);
         //注册监听器
         for (int i = 0; i < 10; i++)
             Qz[i].setOnTouchListener(new mTouch());
@@ -66,12 +59,12 @@ public class GameActivity extends AppCompatActivity {
         BG[4][1] = 0;
         BG[4][2] = 0;
         //输出屏幕宽度和
-        txt1.post(new Runnable() {
+        gaming_text.post(new Runnable() {
             @Override
             public void run() {
-                txt1.setText("Screen Width:" + txt1.getWidth() + "; Qz Width" + Qz[1].getWidth());
-                txt1.setText("欢迎来到剪纸华容道");
-                SW = txt1.getWidth();
+                gaming_text.setText("Screen Width:" + gaming_text.getWidth() + "; Qz Width" + Qz[1].getWidth());
+                gaming_text.setText("欢迎来到剪纸华容道");
+                SW = gaming_text.getWidth();
                 init();
             }
         });
@@ -87,20 +80,19 @@ public class GameActivity extends AppCompatActivity {
         BG[4][2] = 0;
         //输出屏幕宽度和
         Step = 0;//步数归零
-        txt1.post(new Runnable() {
+        gaming_text.post(new Runnable() {
             @Override
             public void run() {
-                txt1.setText("Screen Width:" + txt1.getWidth() + "; Qz Width" + Qz[1].getWidth());
-//                txt1.setText("欢迎来到剪纸华容道");
-                SW = txt1.getWidth();
+//                gaming_text.setText("Screen Width:" + gaming_text.getWidth() + "; Qz Width" + Qz[1].getWidth());
+                gaming_text.setText("欢迎来到剪纸华容道");
+                SW = gaming_text.getWidth();
 
                 init();
             }
         });
         Snackbar.make(view, getString(R.string.reset_toast), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-//        Toast.makeText(GameActivity.this, getString(R.string.reset_toast), Toast.LENGTH_SHORT).show();
-//        win();
+
     }
 
     //监听实现
@@ -108,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            int type; // 1 兵    2  张飞  3 关羽 4 曹操
+            int type;
             int r, c;
             if (v.getWidth() == v.getHeight()) {
                 Log.d("HeightWidth", v.getHeight() + "," + v.getWidth());
@@ -218,7 +210,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (r + 1 == 3 && c == 1) {
                                     Log.d("onWinning", "From up to down");
                                     win();
-//                                    txt1.setText("你赢了！共用" + Step + "步！");
+//                                    gaming_text.setText("你赢了！共用" + Step + "步！");
                                     //此处应该转到另一个activity，胜利用新的activity或者一个toast体现
                                     //记录用户时间和步数，如果top5，加入排行榜
                                     //注意析构
@@ -265,7 +257,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (r == 3 && c == 2) {
                                     Log.d("onWinning", "From right to left");
                                     win();
-//                                    txt1.setText("你赢了，共用" + Step + "步！");
+//                                    gaming_text.setText("你赢了，共用" + Step + "步！");
                                 }
                             }
                             break;
@@ -322,13 +314,13 @@ public class GameActivity extends AppCompatActivity {
 
         private void incr_and_show_step() {
             Step++;
-            txt1.setText("当前步数：" + Step + "步");
+            gaming_text.setText("当前步数：" + Step + "步");
         }
     }
 
 
     public void win() {
-        txt1.setText("你赢了！共用" + Step + "步！");
+        gaming_text.setText("你赢了！共用" + Step + "步！");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setTitle("请输入您的名字：");
@@ -413,7 +405,8 @@ public class GameActivity extends AppCompatActivity {
 //                v.setHeight(h * temp);
 //        v.setWidth(w * dip2px(getApplicationContext(), SW / 4));//(240);
 //        v.setHeight(h * dip2px(getApplicationContext(), SW / 4));
-        v.setText(txt);
+        v.setText(txt);//用于调试
+        v.setText("");
         String temp_w = "width" + v.getWidth();
         String temp_h = "height" + v.getHeight();
         Log.d("qz_init", v.getText() + temp_w + temp_h);
@@ -448,7 +441,7 @@ public class GameActivity extends AppCompatActivity {
         SetPos(Qz[8], 2, 1);
         SetSize(Qz[9], 2, 2, "曹操");
         SetPos(Qz[9], 0, 1);
-        //txt1.setText("SW：" +dip2px(getApplicationContext(), SW)+","+getApplicationContext().getResources().getDisplayMetrics().density);
+        //gaming_text.setText("SW：" +dip2px(getApplicationContext(), SW)+","+getApplicationContext().getResources().getDisplayMetrics().density);
         BingSize = Qz[0].getHeight();
 
     }

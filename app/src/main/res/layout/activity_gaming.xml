@@ -10,7 +10,7 @@
         android:id="@+id/Qp"
         android:layout_width="480dp"
         android:layout_height="600dp"
-        app:layout_constraintBottom_toTopOf="@+id/Text1"
+        app:layout_constraintBottom_toTopOf="@+id/GamingText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
     </AbsoluteLayout>
 
     <TextView
-        android:id="@+id/Text1"
+        android:id="@+id/GamingText"
         android:layout_width="fill_parent"
         android:layout_height="21dp"
         android:layout_marginBottom="12dp"
