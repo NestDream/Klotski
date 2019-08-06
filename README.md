@@ -1,7 +1,5 @@
 ## 剪纸华容道
-开发者：郭立  
-组织：南开大学软件学院  
-学号：1613545
+南开大学软件学院移动应用开发课程作业
 
 ### Google Play 应用商店
 本游戏已经发行在Google Play上：[https://play.google.com/store/apps/details?id=com.guoli.klotski](https://play.google.com/store/apps/details?id=com.guoli.klotski)
